@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>CSS 实现简易手绘效果</title>
+    <url>/2025/03/03/CSS%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E6%89%8B%E7%BB%98%E6%95%88%E6%9E%9C/</url>
+    <content><![CDATA[<h1 id="CSS-实现简易手绘效果"><a href="#CSS-实现简易手绘效果" class="headerlink" title="CSS 实现简易手绘效果"></a>CSS 实现简易手绘效果</h1><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
+<li>线性变化</li>
+<li>修改明亮度，由亮变暗，从白变黑</li>
+<li>修改灰度，从 1 变为 0，模拟上色过程</li>
+<li>修改饱和度，对比度</li>
+</ol>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#myPic</span> &#123;</span><br><span class="line">    <span class="attribute">animation-timing-function</span>: linear;</span><br><span class="line">    <span class="attribute">animation-name</span>: drawPic;</span><br><span class="line">    <span class="attribute">animation-duration</span>: <span class="number">3s</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> drawPic &#123;</span><br><span class="line"></span><br><span class="line">    <span class="number">0%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">10</span>) <span class="built_in">contrast</span>(<span class="number">10</span>) <span class="built_in">grayscale</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">15%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">10</span>) <span class="built_in">contrast</span>(<span class="number">10</span>) <span class="built_in">grayscale</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">0.3</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">30%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">5</span>) <span class="built_in">contrast</span>(<span class="number">10</span>) <span class="built_in">grayscale</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">0.5</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">45%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">3</span>) <span class="built_in">contrast</span>(<span class="number">10</span>) <span class="built_in">grayscale</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">60%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">2</span>) <span class="built_in">contrast</span>(<span class="number">2</span>) <span class="built_in">grayscale</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">75%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">1.5</span>) <span class="built_in">contrast</span>(<span class="number">1</span>) <span class="built_in">grayscale</span>(<span class="number">0.5</span>) <span class="built_in">saturate</span>(<span class="number">0.4</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">85%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">1.3</span>) <span class="built_in">contrast</span>(<span class="number">1</span>) <span class="built_in">grayscale</span>(<span class="number">0.25</span>) <span class="built_in">saturate</span>(<span class="number">0.7</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">100%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">1</span>) <span class="built_in">contrast</span>(<span class="number">1</span>) <span class="built_in">grayscale</span>(<span class="number">0</span>) <span class="built_in">saturate</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>new icle</title>
+    <url>/2025/02/26/newFile/</url>
+    <content><![CDATA[<h1 id="標題"><a href="#標題" class="headerlink" title="標題"></a>標題</h1><h2 id="小標題"><a href="#小標題" class="headerlink" title="小標題"></a>小標題</h2><p>hihihiQWQ</p>
+]]></content>
+      <categories>
+        <category>cate1</category>
+      </categories>
+      <tags>
+        <tag>a</tag>
+        <tag>b</tag>
+        <tag>c</tag>
+        <tag>d</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2025/02/25/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>cate2</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>常见漏洞</title>
+    <url>/2025/03/03/%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E/</url>
+    <content><![CDATA[<h1 id="常见漏洞"><a href="#常见漏洞" class="headerlink" title="常见漏洞"></a>常见漏洞</h1><h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><ul>
+<li><p>逻辑</p>
+<ul>
+<li>转义+拼接</li>
+</ul>
+</li>
+<li><p>预防</p>
+<ul>
+<li>合规编码</li>
+<li>sql预编译</li>
+<li>输入校验</li>
+</ul>
+</li>
+</ul>
+<h2 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h2><ul>
+<li>逻辑<ul>
+<li>HTML嵌入恶意代码</li>
+</ul>
+</li>
+<li>包含<ul>
+<li>反射型  将用户相关信息直接展示HTML</li>
+<li>存储型  执行获取数据库中信息</li>
+<li>DOM型 网页中嵌入</li>
+</ul>
+</li>
+<li>预防<ul>
+<li>编码转义 Server.HTMLEncode，对输入字符中的符号&gt; &lt; &amp; 替换</li>
+<li>开启浏览器的XSS筛选器，如何开启 &#x3D;&gt; 添加HTTP-response头</li>
+<li>开启CSP策略</li>
+<li>JS前端防范</li>
+<li>后端框架防范</li>
+</ul>
+</li>
+</ul>
+<h2 id="XPath注入"><a href="#XPath注入" class="headerlink" title="XPath注入"></a>XPath注入</h2><ul>
+<li>防范<ul>
+<li>XQuery参数化查询</li>
+</ul>
+</li>
+</ul>
+<h2 id="XML外部实体注入"><a href="#XML外部实体注入" class="headerlink" title="XML外部实体注入"></a>XML外部实体注入</h2><p><a href="https://so.csdn.net/so/search?q=XML&spm=1001.2101.3001.7020">XML</a>文档结构包括XML声明、DTD文档类型定义（可选）、文档元素。</p>
+<ul>
+<li><p>逻辑</p>
+<ul>
+<li>定制实体</li>
+<li>根因: 解析entity</li>
+</ul>
+</li>
+<li><p>防范</p>
+<ul>
+<li>禁用外部实体</li>
+<li>限制解析</li>
+<li>过滤用户的XML数据</li>
+</ul>
+</li>
+</ul>
+<h2 id="水平垂直越权"><a href="#水平垂直越权" class="headerlink" title="水平垂直越权"></a>水平垂直越权</h2><ul>
+<li>水平：<strong>就是通过更换的某个ID之类的身份标识，从而使 A 账号获取（修改等）B 账号数据。</strong></li>
+<li>垂直：<strong>使用低权限身份的账号，发送高权限账号才能有的请求，获得其高权限的操作。</strong></li>
+<li>防范：前后端验证，调用前验证</li>
+</ul>
+<h2 id="任意文件上传"><a href="#任意文件上传" class="headerlink" title="任意文件上传"></a>任意文件上传</h2><h5 id="WebShell"><a href="#WebShell" class="headerlink" title="WebShell"></a>WebShell</h5><ul>
+<li>文件上传漏洞是指文件上传功能<code>没有对上传的文件做合理严谨的过滤</code>，导致用户可以利用此功能，上传能<code>被服务端解析执行的文件</code>，并通过此文件获得<code>执行服务端命令的能力</code>。</li>
+</ul>
+<h2 id="CRLF攻击"><a href="#CRLF攻击" class="headerlink" title="CRLF攻击"></a>CRLF攻击</h2><ul>
+<li>逻辑：HTTP协议中，使用两个CRLF分割，攻击者可以用分隔符拼接注入脚本，导致页面显现需要的信息</li>
+<li>防范：过滤 <code>\r, \n</code></li>
+</ul>
+<h2 id="日志伪造漏洞"><a href="#日志伪造漏洞" class="headerlink" title="日志伪造漏洞"></a>日志伪造漏洞</h2><p>攻击者通过在用户输入中嵌入特定的控制字符或代码，从而在系统后台日志中插入虚假或误导性信息的行为。这种攻击可能会破坏日志文件的完整性和可靠性，使得日志分析变得困难，甚至可能导致安全漏洞。</p>
+<h2 id="重放攻击"><a href="#重放攻击" class="headerlink" title="重放攻击"></a>重放攻击</h2><ul>
+<li><p>逻辑</p>
+<ul>
+<li>一种中间人攻击，攻击者通过截获合法的数据传输并重新发送它们来欺骗接收方，让接收方误以为是合法的消息。</li>
+</ul>
+</li>
+<li><p>防范</p>
+<ul>
+<li>使用一次性密码</li>
+<li>时间戳</li>
+<li>双因素认证</li>
+</ul>
+</li>
+</ul>
+<h2 id="开放重定向"><a href="#开放重定向" class="headerlink" title="开放重定向"></a>开放重定向</h2><ul>
+<li><p>逻辑</p>
+<ul>
+<li>当一个应用程序允许用户指定一个重定向目标URL，并且没有正确地验证这个URL是否安全和合法，就可能引发开放重定向漏洞。攻击者可以利用这种漏洞将用户重定向到恶意网站，从而进行钓鱼攻击、身份盗用或散布恶意软件。</li>
+</ul>
+</li>
+<li><p>举例</p>
+<ul>
+<li><p>假设有一个网站<code>example.com</code>，它在用户登录后允许通过查询参数<code>next</code>指定重定向的URL。正常的登录流程可能如下：</p>
+<ol>
+<li>用户访问<code>example.com/login?next=/home</code>。</li>
+<li>用户登录后，网站验证了登录信息，然后将用户重定向到<code>/home</code>页面。</li>
+</ol>
+<p>然而，如果网站没有正确验证<code>next</code>参数，攻击者可以构造如下的URL：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">example.com/login?next=http://malicious-site.com</span><br></pre></td></tr></table></figure>
+
+<p>当用户登录并被重定向时，他们将被发送到<code>malicious-site.com</code>，而不是预期的<code>example.com/home</code>。恶意网站可以伪装成合法的网站，诱骗用户输入敏感信息，如登录凭据或信用卡信息。</p>
+</li>
+</ul>
+</li>
+<li><p>防范</p>
+<ul>
+<li><strong>验证重定向URL</strong>：确保URL只指向应用程序信任的域名，或者只允许特定的URL模式。</li>
+<li><strong>使用白名单</strong>：创建一个允许的URL白名单，只允许重定向到白名单中的URL。</li>
+<li><strong>过滤输入</strong>：对用户提交的任何URL进行适当的过滤和编码，防止潜在的恶意输入。</li>
+<li><strong>安全设计</strong>：在设计阶段就考虑到安全因素，避免在不安全的上下文中使用重定向。</li>
+</ul>
+</li>
+</ul>
+<h2 id="命令注入漏洞"><a href="#命令注入漏洞" class="headerlink" title="命令注入漏洞"></a>命令注入漏洞</h2><ul>
+<li><p>逻辑</p>
+<ul>
+<li>当Web应用程序需要执行系统命令时，例如在后台运行脚本、查询数据库或执行文件操作，它可能会使用用户提供的数据作为命令的一部分。如果应用程序没有正确地清理或验证这些数据，攻击者可以插入特殊字符或附加额外的命令，导致应用程序执行未预期的操作。</li>
+</ul>
+</li>
+<li><p>举例</p>
+<p>假设有一个搜索功能，它允许用户输入一个关键词，然后应用程序使用这个关键词执行一个grep命令来搜索文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grep -i &quot;$searchTerm&quot; /path/to/file</span><br></pre></td></tr></table></figure>
+
+<p>如果<code>$searchTerm</code>变量直接包含用户输入，那么攻击者可以通过在搜索字段中输入以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;; rm / -rf; &quot;</span><br></pre></td></tr></table></figure>
+
+<p>当应用程序构造并执行命令时，实际的命令会变成：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grep -i &quot;&#x27;; rm / -rf; &#x27;&quot; /path/to/file</span><br></pre></td></tr></table></figure>
+
+<p>由于grep命令的参数被双引号包围，<code>&quot;;&quot;</code>将终止grep命令的参数，然后<code>rm / -rf;</code>将作为独立的命令执行，这将尝试删除根目录下的所有文件和目录，可能导致系统崩溃或数据丢失。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>安全</category>
+        <category>漏洞</category>
+      </categories>
+      <tags>
+        <tag>SQL注入</tag>
+        <tag>XSS</tag>
+        <tag>CSRF</tag>
+      </tags>
+  </entry>
+</search>
