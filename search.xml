@@ -18,39 +18,94 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2025/03/02/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <title>常见漏洞</title>
+    <url>/2025/03/03/GitHook/</url>
+    <content><![CDATA[<ul>
+<li><h1 id="Git-Hook"><a href="#Git-Hook" class="headerlink" title="Git Hook"></a>Git Hook</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><code>Git命令</code>触发的时候, 执行特定操作<code>(Shell脚本)</code>, 分为客户端的<code>Hook</code>和服务端的<code>Hook</code>, 此处介绍客户端<code>Hook</code>。</p>
+<h2 id="客户端Hook种类"><a href="#客户端Hook种类" class="headerlink" title="客户端Hook种类"></a>客户端Hook种类</h2><table>
+<thead>
+<tr>
+<th>种类</th>
+<th>含义</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>pre-commit</em></td>
+<td>在用户尝试提交更改之前运行</td>
+<td>常用于执行代码格式化、代码质量检查等操作，确保提交的代码符合团队规范。</td>
+</tr>
+<tr>
+<td><em>prepare-commit-msg</em></td>
+<td>在生成提交信息（即打开文本编辑器让用户输入提交信息）之前运行</td>
+<td>可以用来自动填充提交信息模板，或者根据当前的变更情况预填充一些信息。</td>
+</tr>
+<tr>
+<td><em>commit-msg</em></td>
+<td>在用户完成提交信息的编辑后，但在实际创建提交对象之前运行。</td>
+<td>通常用于验证提交信息是否符合特定格式或包含必要的关键字。</td>
+</tr>
+<tr>
+<td><em>post-commit</em></td>
+<td>在提交完成后运行</td>
+<td>可以用来发送通知邮件、更新统计信息等。</td>
+</tr>
+<tr>
+<td><em>pre-rebase</em></td>
+<td>在变基操作前运行</td>
+<td>可以用来检查是否有未提交的更改，或者在变基前执行其他准备工作。</td>
+</tr>
+<tr>
+<td><em>pre-push</em></td>
+<td>在用户尝试将本地分支推送到远程仓库之前运行</td>
+<td>常用于执行更严格的代码审查，比如通过持续集成系统检查构建是否成功，或者检查是否有未解决的问题。</td>
+</tr>
+</tbody></table>
+<h2 id="如何配置"><a href="#如何配置" class="headerlink" title="如何配置"></a>如何配置</h2><h3 id="配置在哪"><a href="#配置在哪" class="headerlink" title="配置在哪"></a>配置在哪</h3><ul>
+<li><code>git</code> 分为<code>全局配置</code>和<code>各个项目的配置</code>,</li>
+<li>其中<code>全局配置</code>在家目录下的<code>.git</code>文件夹,</li>
+<li><code>各个项目的配置</code>在项目中的<code>.git</code>文件夹</li>
+</ul>
+<h3 id="配置流程"><a href="#配置流程" class="headerlink" title="配置流程"></a>配置流程</h3><ol>
+<li><p>需要自己建一个文件夹<code>myHooks(名称任意)</code>, 用于存放你的hook脚本</p>
+</li>
+<li><p>使用命令 <code>git config --global core.hooksPath ./myHooks</code> 配置全局Hook，或者使用 <code>git config core.hooksPath ./myHooks</code> 为当前项目指定Hook</p>
+</li>
+<li><p>上述配置步骤，也可以直接打开全局&#x2F;项目中的<code>.git</code>目录, 找到 <code>core.hooksPath</code> 配置对应的Hooks存放目录</p>
+</li>
+<li><p>其中Hook脚本文件夹<code>myHooks</code>中的脚本, 必须严格按照上面种类命名, 比如 <em>pre-commit</em></p>
+</li>
+<li><p>在响应的仓库, 执行对应的git命令, 可以看到脚本执行</p>
+</li>
+</ol>
+<h2 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h2><h3 id="样例1-简单"><a href="#样例1-简单" class="headerlink" title="样例1 (简单)"></a>样例1 (简单)</h3><ol>
+<li><p>创建目录 <code>myHooks</code></p>
+</li>
+<li><p><code>myHooks</code>中定义脚本<code>pre-commit</code>：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># 检查代码格式</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello!!!&quot;</span> &gt;&gt; D:\\hello.txt</span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行 <code>git config --global core.hooksPath ./myHooks</code></p>
+</li>
+<li><p>在任意 git 仓库执行 <code>git commit</code> 命令， 你会看到当前项目的目录下面多出了 hello.txt 文件</p>
+</li>
+</ol>
+<h3 id="样例2"><a href="#样例2" class="headerlink" title="样例2"></a>样例2</h3><ol>
+<li><p>该脚本监控 <code>*Mapper.java</code>文件, 即 JAVA 中的 DTO 接口层</p>
+</li>
+<li><p>如果文件是新增或者修改, 判断 <code>*Mapper.java</code> 文件的新增和修改函数的上一行是否包含特定的注解:</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 每隔一行将换行符替换为空格</span></span><br><span class="line">lines=$(git diff --cached | grep <span class="string">&quot;+++\|@@&quot;</span> | sed -n <span class="string">&#x27;h; n; G; s/\n/ /; p&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$lines</span>&quot;</span> | <span class="keyword">while</span> <span class="built_in">read</span> line</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  line=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$line</span>&quot;</span> | grep -e <span class="string">&quot;Mapper\.java$&quot;</span>)</span><br><span class="line">  <span class="keyword">if</span> [ -z <span class="string">&quot;<span class="variable">$line</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">continue</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$line</span>&quot;</span></span><br><span class="line">  <span class="keyword">if</span>  [[ <span class="variable">$line</span> =~ ^.+\+([0-9]+),([0-9]+).*b/([^ ]+).*$ ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="comment"># 提取信息: 文件名, 更新起始行, 更新行数</span></span><br><span class="line">    row_update_start=<span class="string">&quot;<span class="variable">$&#123;BASH_REMATCH[1]&#125;</span>&quot;</span></span><br><span class="line">    row_update_cnt=<span class="string">&quot;<span class="variable">$&#123;BASH_REMATCH[2]&#125;</span>&quot;</span></span><br><span class="line">    file_name=<span class="string">&quot;<span class="variable">$&#123;BASH_REMATCH[3]&#125;</span>&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;start: <span class="variable">$row_update_start</span> cnt: <span class="variable">$row_update_cnt</span> file: <span class="variable">$file_name</span>&quot;</span></span><br><span class="line">    <span class="comment"># file_rows=$(cat &quot;$file_name&quot; | tail -n +`expr $row_update_start - 1` | head -n &quot;$row_update_cnt&quot;)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 提取文件对应行数据</span></span><br><span class="line">    file_rows=$(sed -n <span class="string">&quot;`expr <span class="variable">$row_update_start</span> - 1 &#x27;|&#x27; 1`,`expr <span class="variable">$row_update_start</span> + <span class="variable">$row_update_cnt</span>`p&quot;</span> <span class="variable">$file_name</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 判断是否满足条件</span></span><br><span class="line">    pre_row=<span class="string">&quot;&quot;</span></span><br><span class="line">    cur_row=<span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$file_rows</span>&quot;</span> | <span class="keyword">while</span> <span class="built_in">read</span> row</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">      cur_row=<span class="variable">$row</span></span><br><span class="line">      <span class="keyword">if</span> [[ <span class="variable">$cur_row</span> =~ ^int.+\;$ ]]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;match row: <span class="variable">$cur_row</span>&quot;</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;prev: <span class="variable">$pre_row</span>&quot;</span></span><br><span class="line">        <span class="comment"># 判断上一行是否包含注解</span></span><br><span class="line">        <span class="keyword">if</span> [[ <span class="variable">$pre_row</span> =~ ^@SendKafkaAfterCommit* ]]; <span class="keyword">then</span></span><br><span class="line">          <span class="built_in">echo</span> <span class="string">&quot;match suc&quot;</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">          <span class="built_in">echo</span> <span class="string">&quot;match fail, check your Annotation, file: <span class="variable">$file_name</span>&quot;</span></span><br><span class="line">          <span class="built_in">exit</span> 1</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">      <span class="keyword">fi</span></span><br><span class="line">      pre_row=<span class="variable">$cur_row</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">      <span class="built_in">echo</span> <span class="string">&quot;no satisfy line match&quot;</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
 ]]></content>
       <categories>
-        <category>cate2</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>new icle</title>
-    <url>/2025/02/26/newFile/</url>
-    <content><![CDATA[<h1 id="標題"><a href="#標題" class="headerlink" title="標題"></a>標題</h1><h2 id="小標題"><a href="#小標題" class="headerlink" title="小標題"></a>小標題</h2><p>hihihiQWQ</p>
-]]></content>
-      <categories>
-        <category>cate1</category>
+        <category>安全</category>
+        <category>漏洞</category>
       </categories>
       <tags>
-        <tag>a</tag>
-        <tag>b</tag>
-        <tag>c</tag>
-        <tag>d</tag>
+        <tag>SQL注入</tag>
+        <tag>XSS</tag>
+        <tag>CSRF</tag>
       </tags>
   </entry>
   <entry>
@@ -196,6 +251,32 @@
         <tag>SQL注入</tag>
         <tag>XSS</tag>
         <tag>CSRF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>点击事件中获取相对于父元素的长宽</title>
+    <url>/2025/03/08/%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%9B%B8%E5%AF%B9%E4%BA%8E%E7%88%B6%E5%85%83%E7%B4%A0%E7%9A%84%E9%95%BF%E5%AE%BD/</url>
+    <content><![CDATA[<ul>
+<li><h2 id="点击事件中获取相对于父元素的长宽"><a href="#点击事件中获取相对于父元素的长宽" class="headerlink" title="点击事件中获取相对于父元素的长宽"></a>点击事件中获取相对于父元素的长宽</h2><h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> x = e.<span class="property">clientX</span></span><br><span class="line"><span class="keyword">const</span> y = e.<span class="property">clientY</span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">const</span> leftOffset = e.<span class="property">target</span>.<span class="property">offsetLeft</span></span><br><span class="line"><span class="keyword">const</span> topOffset = e.<span class="property">target</span>.<span class="property">offsetTop</span></span><br><span class="line">  </span><br><span class="line"><span class="keyword">const</span> xInside = x - leftOffset</span><br><span class="line"><span class="keyword">const</span> yInside = y - topOffset</span><br></pre></td></tr></table></figure>
+
+<h3 id="解释说明"><a href="#解释说明" class="headerlink" title="解释说明"></a>解释说明</h3><ul>
+<li><p><code>e.clientX</code> 和 <code>e.clientY</code> 表示是鼠标点击位置相对于浏览器视口的x轴和y轴坐标，即相对于窗口左上角的坐标。</p>
+</li>
+<li><p><code>e.target.offsetLeft</code> 和 <code>e.target.offsetTop</code>表示相对于其最近的已定位父元素（或者文档的根元素）的左边界和上边界偏移量</p>
+</li>
+<li><p>两者的差值就是相对于父元素的宽度</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="解释图"><a href="#解释图" class="headerlink" title="解释图"></a>解释图</h3><p>​	<img src="/../pics/articlePics/%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%9B%B8%E5%AF%B9%E4%BA%8E%E7%88%B6%E5%85%83%E7%B4%A0%E7%9A%84%E9%95%BF%E5%AE%BD.PNG" alt="点击事件中获取相对于父元素的长宽"></p>
+]]></content>
+      <categories>
+        <category>前端</category>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
       </tags>
   </entry>
 </search>

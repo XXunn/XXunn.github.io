@@ -1,0 +1,267 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>常见漏洞 | Blog Title</title><meta name="author" content="Xun"><meta name="copyright" content="Xun"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Git Hook简介Git命令触发的时候, 执行特定操作(Shell脚本), 分为客户端的Hook和服务端的Hook, 此处介绍客户端Hook。 客户端Hook种类   种类 含义 用途    pre-commit 在用户尝试提交更改之前运行 常用于执行代码格式化、代码质量检查等操作，确保提交的代码符合团队规范。   prepare-commit-msg 在生成提交信息（即打开文本编辑器让用户输">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见漏洞">
+<meta property="og:url" content="http://example.com/2025/03/03/GitHook/index.html">
+<meta property="og:site_name" content="Blog Title">
+<meta property="og:description" content="Git Hook简介Git命令触发的时候, 执行特定操作(Shell脚本), 分为客户端的Hook和服务端的Hook, 此处介绍客户端Hook。 客户端Hook种类   种类 含义 用途    pre-commit 在用户尝试提交更改之前运行 常用于执行代码格式化、代码质量检查等操作，确保提交的代码符合团队规范。   prepare-commit-msg 在生成提交信息（即打开文本编辑器让用户输">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/hqsw.jpg">
+<meta property="article:published_time" content="2025-03-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-02T16:00:00.000Z">
+<meta property="article:author" content="Xun">
+<meta property="article:tag" content="SQL注入">
+<meta property="article:tag" content="XSS">
+<meta property="article:tag" content="CSRF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/hqsw.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "常见漏洞",
+  "url": "http://example.com/2025/03/03/GitHook/",
+  "image": "http://example.com/img/hqsw.jpg",
+  "datePublished": "2025-03-02T16:00:00.000Z",
+  "dateModified": "2025-03-02T16:00:00.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Xun",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/03/03/GitHook/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'true',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '常见漏洞',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Blog Title" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/hqsw.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/30.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Blog Title</span></a><a class="nav-page-title" href="/"><span class="site-name">常见漏洞</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">常见漏洞</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-02T16:00:00.000Z" title="发表于 2025-03-03 00:00:00">2025-03-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-02T16:00:00.000Z" title="更新于 2025-03-03 00:00:00">2025-03-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%89%E5%85%A8/">安全</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%89%E5%85%A8/%E6%BC%8F%E6%B4%9E/">漏洞</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">932</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><ul>
+<li><h1 id="Git-Hook"><a href="#Git-Hook" class="headerlink" title="Git Hook"></a>Git Hook</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><code>Git命令</code>触发的时候, 执行特定操作<code>(Shell脚本)</code>, 分为客户端的<code>Hook</code>和服务端的<code>Hook</code>, 此处介绍客户端<code>Hook</code>。</p>
+<h2 id="客户端Hook种类"><a href="#客户端Hook种类" class="headerlink" title="客户端Hook种类"></a>客户端Hook种类</h2><table>
+<thead>
+<tr>
+<th>种类</th>
+<th>含义</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>pre-commit</em></td>
+<td>在用户尝试提交更改之前运行</td>
+<td>常用于执行代码格式化、代码质量检查等操作，确保提交的代码符合团队规范。</td>
+</tr>
+<tr>
+<td><em>prepare-commit-msg</em></td>
+<td>在生成提交信息（即打开文本编辑器让用户输入提交信息）之前运行</td>
+<td>可以用来自动填充提交信息模板，或者根据当前的变更情况预填充一些信息。</td>
+</tr>
+<tr>
+<td><em>commit-msg</em></td>
+<td>在用户完成提交信息的编辑后，但在实际创建提交对象之前运行。</td>
+<td>通常用于验证提交信息是否符合特定格式或包含必要的关键字。</td>
+</tr>
+<tr>
+<td><em>post-commit</em></td>
+<td>在提交完成后运行</td>
+<td>可以用来发送通知邮件、更新统计信息等。</td>
+</tr>
+<tr>
+<td><em>pre-rebase</em></td>
+<td>在变基操作前运行</td>
+<td>可以用来检查是否有未提交的更改，或者在变基前执行其他准备工作。</td>
+</tr>
+<tr>
+<td><em>pre-push</em></td>
+<td>在用户尝试将本地分支推送到远程仓库之前运行</td>
+<td>常用于执行更严格的代码审查，比如通过持续集成系统检查构建是否成功，或者检查是否有未解决的问题。</td>
+</tr>
+</tbody></table>
+<h2 id="如何配置"><a href="#如何配置" class="headerlink" title="如何配置"></a>如何配置</h2><h3 id="配置在哪"><a href="#配置在哪" class="headerlink" title="配置在哪"></a>配置在哪</h3><ul>
+<li><code>git</code> 分为<code>全局配置</code>和<code>各个项目的配置</code>,</li>
+<li>其中<code>全局配置</code>在家目录下的<code>.git</code>文件夹,</li>
+<li><code>各个项目的配置</code>在项目中的<code>.git</code>文件夹</li>
+</ul>
+<h3 id="配置流程"><a href="#配置流程" class="headerlink" title="配置流程"></a>配置流程</h3><ol>
+<li><p>需要自己建一个文件夹<code>myHooks(名称任意)</code>, 用于存放你的hook脚本</p>
+</li>
+<li><p>使用命令 <code>git config --global core.hooksPath ./myHooks</code> 配置全局Hook，或者使用 <code>git config core.hooksPath ./myHooks</code> 为当前项目指定Hook</p>
+</li>
+<li><p>上述配置步骤，也可以直接打开全局&#x2F;项目中的<code>.git</code>目录, 找到 <code>core.hooksPath</code> 配置对应的Hooks存放目录</p>
+</li>
+<li><p>其中Hook脚本文件夹<code>myHooks</code>中的脚本, 必须严格按照上面种类命名, 比如 <em>pre-commit</em></p>
+</li>
+<li><p>在响应的仓库, 执行对应的git命令, 可以看到脚本执行</p>
+</li>
+</ol>
+<h2 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h2><h3 id="样例1-简单"><a href="#样例1-简单" class="headerlink" title="样例1 (简单)"></a>样例1 (简单)</h3><ol>
+<li><p>创建目录 <code>myHooks</code></p>
+</li>
+<li><p><code>myHooks</code>中定义脚本<code>pre-commit</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># 检查代码格式</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello!!!&quot;</span> &gt;&gt; D:\\hello.txt</span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行 <code>git config --global core.hooksPath ./myHooks</code></p>
+</li>
+<li><p>在任意 git 仓库执行 <code>git commit</code> 命令， 你会看到当前项目的目录下面多出了 hello.txt 文件</p>
+</li>
+</ol>
+<h3 id="样例2"><a href="#样例2" class="headerlink" title="样例2"></a>样例2</h3><ol>
+<li><p>该脚本监控 <code>*Mapper.java</code>文件, 即 JAVA 中的 DTO 接口层</p>
+</li>
+<li><p>如果文件是新增或者修改, 判断 <code>*Mapper.java</code> 文件的新增和修改函数的上一行是否包含特定的注解:</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 每隔一行将换行符替换为空格</span></span><br><span class="line">lines=$(git diff --cached | grep <span class="string">&quot;+++\|@@&quot;</span> | sed -n <span class="string">&#x27;h; n; G; s/\n/ /; p&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$lines</span>&quot;</span> | <span class="keyword">while</span> <span class="built_in">read</span> line</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  line=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$line</span>&quot;</span> | grep -e <span class="string">&quot;Mapper\.java$&quot;</span>)</span><br><span class="line">  <span class="keyword">if</span> [ -z <span class="string">&quot;<span class="variable">$line</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">continue</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$line</span>&quot;</span></span><br><span class="line">  <span class="keyword">if</span>  [[ <span class="variable">$line</span> =~ ^.+\+([0-9]+),([0-9]+).*b/([^ ]+).*$ ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="comment"># 提取信息: 文件名, 更新起始行, 更新行数</span></span><br><span class="line">    row_update_start=<span class="string">&quot;<span class="variable">$&#123;BASH_REMATCH[1]&#125;</span>&quot;</span></span><br><span class="line">    row_update_cnt=<span class="string">&quot;<span class="variable">$&#123;BASH_REMATCH[2]&#125;</span>&quot;</span></span><br><span class="line">    file_name=<span class="string">&quot;<span class="variable">$&#123;BASH_REMATCH[3]&#125;</span>&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;start: <span class="variable">$row_update_start</span> cnt: <span class="variable">$row_update_cnt</span> file: <span class="variable">$file_name</span>&quot;</span></span><br><span class="line">    <span class="comment"># file_rows=$(cat &quot;$file_name&quot; | tail -n +`expr $row_update_start - 1` | head -n &quot;$row_update_cnt&quot;)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 提取文件对应行数据</span></span><br><span class="line">    file_rows=$(sed -n <span class="string">&quot;`expr <span class="variable">$row_update_start</span> - 1 &#x27;|&#x27; 1`,`expr <span class="variable">$row_update_start</span> + <span class="variable">$row_update_cnt</span>`p&quot;</span> <span class="variable">$file_name</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 判断是否满足条件</span></span><br><span class="line">    pre_row=<span class="string">&quot;&quot;</span></span><br><span class="line">    cur_row=<span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$file_rows</span>&quot;</span> | <span class="keyword">while</span> <span class="built_in">read</span> row</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">      cur_row=<span class="variable">$row</span></span><br><span class="line">      <span class="keyword">if</span> [[ <span class="variable">$cur_row</span> =~ ^int.+\;$ ]]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;match row: <span class="variable">$cur_row</span>&quot;</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;prev: <span class="variable">$pre_row</span>&quot;</span></span><br><span class="line">        <span class="comment"># 判断上一行是否包含注解</span></span><br><span class="line">        <span class="keyword">if</span> [[ <span class="variable">$pre_row</span> =~ ^@SendKafkaAfterCommit* ]]; <span class="keyword">then</span></span><br><span class="line">          <span class="built_in">echo</span> <span class="string">&quot;match suc&quot;</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">          <span class="built_in">echo</span> <span class="string">&quot;match fail, check your Annotation, file: <span class="variable">$file_name</span>&quot;</span></span><br><span class="line">          <span class="built_in">exit</span> 1</span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">      <span class="keyword">fi</span></span><br><span class="line">      pre_row=<span class="variable">$cur_row</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">      <span class="built_in">echo</span> <span class="string">&quot;no satisfy line match&quot;</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Xun</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/03/03/GitHook/">http://example.com/2025/03/03/GitHook/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">Blog Title</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/SQL%E6%B3%A8%E5%85%A5/">SQL注入</a><a class="post-meta__tags" href="/tags/XSS/">XSS</a><a class="post-meta__tags" href="/tags/CSRF/">CSRF</a></div><div class="post-share"><div class="social-share" data-image="/img/hqsw.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/03/03/CSS%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E6%89%8B%E7%BB%98%E6%95%88%E6%9E%9C/" title="CSS 实现简易手绘效果"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">CSS 实现简易手绘效果</div></div><div class="info-2"><div class="info-item-1">CSS 实现简易手绘效果思路 线性变化 修改明亮度，由亮变暗，从白变黑 修改灰度，从 1 变为 0，模拟上色过程 修改饱和度，对比度  代码123456789101112131415161718192021222324252627282930313233343536373839404142434445#myPic &#123;    animation-timing-function: linear;    animation-name: drawPic;    animation-duration: 3s;&#125;@keyframes drawPic &#123;    0% &#123;        filter: brightness(10) contrast(10) grayscale(1);        opacity: 0;    &#125;    15% &#123;        filter: brightness(10) contrast(10) grayscale(1);        opacity: 0.3;    &#125;    30%...</div></div></div></a><a class="pagination-related" href="/2025/03/03/%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E/" title="常见漏洞"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">常见漏洞</div></div><div class="info-2"><div class="info-item-1">常见漏洞SQL注入 逻辑  转义+拼接   预防  合规编码 sql预编译 输入校验    XSS 逻辑 HTML嵌入恶意代码   包含 反射型  将用户相关信息直接展示HTML 存储型  执行获取数据库中信息 DOM型 网页中嵌入   预防 编码转义 Server.HTMLEncode，对输入字符中的符号&gt; &lt; &amp; 替换 开启浏览器的XSS筛选器，如何开启 &#x3D;&gt; 添加HTTP-response头 开启CSP策略 JS前端防范 后端框架防范    XPath注入 防范 XQuery参数化查询    XML外部实体注入XML文档结构包括XML声明、DTD文档类型定义（可选）、文档元素。  逻辑  定制实体 根因: 解析entity   防范  禁用外部实体 限制解析 过滤用户的XML数据    水平垂直越权 水平：就是通过更换的某个ID之类的身份标识，从而使 A 账号获取（修改等）B...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/03/03/%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E/" title="常见漏洞"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-03</div><div class="info-item-2">常见漏洞</div></div><div class="info-2"><div class="info-item-1">常见漏洞SQL注入 逻辑  转义+拼接   预防  合规编码 sql预编译 输入校验    XSS 逻辑 HTML嵌入恶意代码   包含 反射型  将用户相关信息直接展示HTML 存储型  执行获取数据库中信息 DOM型 网页中嵌入   预防 编码转义 Server.HTMLEncode，对输入字符中的符号&gt; &lt; &amp; 替换 开启浏览器的XSS筛选器，如何开启 &#x3D;&gt; 添加HTTP-response头 开启CSP策略 JS前端防范 后端框架防范    XPath注入 防范 XQuery参数化查询    XML外部实体注入XML文档结构包括XML声明、DTD文档类型定义（可选）、文档元素。  逻辑  定制实体 根因: 解析entity   防范  禁用外部实体 限制解析 过滤用户的XML数据    水平垂直越权 水平：就是通过更换的某个ID之类的身份标识，从而使 A 账号获取（修改等）B...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/hqsw.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Xun</div><div class="author-info-description">this is a description</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/XXunn"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/XXunn" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://www.cnblogs.com/xun-" target="_blank" title="Blog"><i class="fa fa-book-open"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=1015288025&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:sunzhangxun@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git-Hook"><span class="toc-number">1.</span> <span class="toc-text">Git Hook</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AFHook%E7%A7%8D%E7%B1%BB"><span class="toc-number">1.2.</span> <span class="toc-text">客户端Hook种类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.</span> <span class="toc-text">如何配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%9C%A8%E5%93%AA"><span class="toc-number">1.3.1.</span> <span class="toc-text">配置在哪</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%B5%81%E7%A8%8B"><span class="toc-number">1.3.2.</span> <span class="toc-text">配置流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B"><span class="toc-number">1.4.</span> <span class="toc-text">样例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B1-%E7%AE%80%E5%8D%95"><span class="toc-number">1.4.1.</span> <span class="toc-text">样例1 (简单)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B7%E4%BE%8B2"><span class="toc-number">1.4.2.</span> <span class="toc-text">样例2</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/08/%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6%E4%B8%AD%E8%8E%B7%E5%8F%96%E7%9B%B8%E5%AF%B9%E4%BA%8E%E7%88%B6%E5%85%83%E7%B4%A0%E7%9A%84%E9%95%BF%E5%AE%BD/" title="点击事件中获取相对于父元素的长宽">点击事件中获取相对于父元素的长宽</a><time datetime="2025-03-07T16:00:00.000Z" title="发表于 2025-03-08 00:00:00">2025-03-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/03/CSS%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E6%89%8B%E7%BB%98%E6%95%88%E6%9E%9C/" title="CSS 实现简易手绘效果">CSS 实现简易手绘效果</a><time datetime="2025-03-02T16:00:00.000Z" title="发表于 2025-03-03 00:00:00">2025-03-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/03/GitHook/" title="常见漏洞">常见漏洞</a><time datetime="2025-03-02T16:00:00.000Z" title="发表于 2025-03-03 00:00:00">2025-03-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/03/%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E/" title="常见漏洞">常见漏洞</a><time datetime="2025-03-02T16:00:00.000Z" title="发表于 2025-03-03 00:00:00">2025-03-03</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/pics/themePics/szw-2.JPG);"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2025 By Xun</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.3</a></div><div class="footer_custom_text">🤣🤣🤣</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.4" zIndex="-1" mobile="false" data-click="false"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="请输入搜索内容" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
