@@ -26,12 +26,137 @@
 <li>修改灰度，从 1 变为 0，模拟上色过程</li>
 <li>修改饱和度，对比度</li>
 </ol>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#myPic</span> &#123;</span><br><span class="line">    <span class="attribute">animation-timing-function</span>: linear;</span><br><span class="line">    <span class="attribute">animation-name</span>: drawPic;</span><br><span class="line">    <span class="attribute">animation-duration</span>: <span class="number">3s</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> drawPic &#123;</span><br><span class="line"></span><br><span class="line">    <span class="number">0%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">10</span>) <span class="built_in">contrast</span>(<span class="number">10</span>) <span class="built_in">grayscale</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">15%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">10</span>) <span class="built_in">contrast</span>(<span class="number">10</span>) <span class="built_in">grayscale</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">0.3</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">30%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">5</span>) <span class="built_in">contrast</span>(<span class="number">10</span>) <span class="built_in">grayscale</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">0.5</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">45%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">3</span>) <span class="built_in">contrast</span>(<span class="number">10</span>) <span class="built_in">grayscale</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">60%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">2</span>) <span class="built_in">contrast</span>(<span class="number">2</span>) <span class="built_in">grayscale</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">75%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">1.5</span>) <span class="built_in">contrast</span>(<span class="number">1</span>) <span class="built_in">grayscale</span>(<span class="number">0.5</span>) <span class="built_in">saturate</span>(<span class="number">0.4</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">85%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">1.3</span>) <span class="built_in">contrast</span>(<span class="number">1</span>) <span class="built_in">grayscale</span>(<span class="number">0.25</span>) <span class="built_in">saturate</span>(<span class="number">0.7</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">100%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">1</span>) <span class="built_in">contrast</span>(<span class="number">1</span>) <span class="built_in">grayscale</span>(<span class="number">0</span>) <span class="built_in">saturate</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>代码如下</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#myPic</span> &#123;</span><br><span class="line">    <span class="attribute">animation-timing-function</span>: linear;</span><br><span class="line">    <span class="attribute">animation-name</span>: drawPic;</span><br><span class="line">    <span class="attribute">animation-duration</span>: <span class="number">3s</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@keyframes</span> drawPic &#123;</span><br><span class="line"></span><br><span class="line">    <span class="number">0%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">10</span>) <span class="built_in">contrast</span>(<span class="number">10</span>) <span class="built_in">grayscale</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">15%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">10</span>) <span class="built_in">contrast</span>(<span class="number">10</span>) <span class="built_in">grayscale</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">0.3</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">30%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">5</span>) <span class="built_in">contrast</span>(<span class="number">10</span>) <span class="built_in">grayscale</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">0.5</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">45%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">3</span>) <span class="built_in">contrast</span>(<span class="number">10</span>) <span class="built_in">grayscale</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">60%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">2</span>) <span class="built_in">contrast</span>(<span class="number">2</span>) <span class="built_in">grayscale</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">75%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">1.5</span>) <span class="built_in">contrast</span>(<span class="number">1</span>) <span class="built_in">grayscale</span>(<span class="number">0.5</span>) <span class="built_in">saturate</span>(<span class="number">0.4</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">85%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">1.3</span>) <span class="built_in">contrast</span>(<span class="number">1</span>) <span class="built_in">grayscale</span>(<span class="number">0.25</span>) <span class="built_in">saturate</span>(<span class="number">0.7</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="number">100%</span> &#123;</span><br><span class="line">        <span class="attribute">filter</span>: <span class="built_in">brightness</span>(<span class="number">1</span>) <span class="built_in">contrast</span>(<span class="number">1</span>) <span class="built_in">grayscale</span>(<span class="number">0</span>) <span class="built_in">saturate</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>CSS</category>
       </categories>
       <tags>
         <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Cron 表达式</title>
+    <url>/2025/03/21/Cron%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h1 id="Cron-表达式"><a href="#Cron-表达式" class="headerlink" title="Cron 表达式"></a>Cron 表达式</h1><h3 id="用于定时任务"><a href="#用于定时任务" class="headerlink" title="用于定时任务"></a>用于定时任务</h3><ul>
+<li>格式：秒 分 时 日 月 周 年</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>字段</strong></th>
+<th><strong>允许值的范围</strong></th>
+<th><strong>允许的特殊字符</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>秒</strong></td>
+<td>0-59</td>
+<td>, - * &#x2F;</td>
+</tr>
+<tr>
+<td><strong>分</strong></td>
+<td>0-59</td>
+<td>, - * &#x2F;</td>
+</tr>
+<tr>
+<td><strong>时</strong></td>
+<td>0-23</td>
+<td>, - * &#x2F;</td>
+</tr>
+<tr>
+<td><strong>日期</strong></td>
+<td>1-31</td>
+<td>, - * ? &#x2F; L W C</td>
+</tr>
+<tr>
+<td><strong>月</strong></td>
+<td>1-12或JAN-DEC</td>
+<td>, - * &#x2F;</td>
+</tr>
+<tr>
+<td><strong>星期</strong></td>
+<td>1-7或SUN-SAT</td>
+<td>, - * ? &#x2F; L C #</td>
+</tr>
+<tr>
+<td><strong>年(可选)</strong></td>
+<td>留空，1970-2099</td>
+<td>, - * &#x2F;</td>
+</tr>
+</tbody></table>
+<h3 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h3><p>*：(通配符)，表示该字段所有可能的值，例如在月份中表示每个月，在日期中表示每天，在小时中表示每小时；</p>
+<p>-：表示这一段值的连续整数范围，例如在小时的子表达式中，”10-13”表示10时，11时，12时，13时；</p>
+<p>,：表示列出枚举值，例如在分的子表达式中，”5,20”表示在5分和20分触发；</p>
+<p>&#x2F;：表示增量，例如在秒的子表达式中，”0&#x2F;5”表示从第0秒开始，每隔5秒；</p>
+<p>?：用在日期和星期字段，表示没有具体的值(就是指日期的某一天&#x2F;星期的某一天)，当两个子表达式中有一个被指定一个值或者符号后，为了避免冲突，另外一个的值需要设置为?，而不能用*；</p>
+<p>L：用在日期和星期字段，是last单词的缩写。在日期字段中表示一个月的最后一天，例如1月31号，4月30号；在星期字段表示一个星期的最后一天，也就是7或者SAT。如果L前还有具体的内容则表示另外的含义，例如日期中6L表示这个月的倒数第6天，星期中FRIL表示这个月的最后一个星期五；</p>
+<p>W：weekday的缩写，只能用在日期字段，表示最接近指定日期的工作日。这个用法只会在当前月计算值，不会超过当前月，只能指明具体的某一天，不能是范围和列表。也可以用LW表示这个月的最后一个工作日，也就是这个月的最后一个星期五；</p>
+<p>#：只在星期字段出现，用来指定这个月的第一个周几，例如6#3或者FRI#3表示这个月第三个周五；</p>
+<p>C：只用在日期和星期字段，代表Calendar的意思，表示依靠一个指定的日历。必须关联日历(不常用)</p>
+]]></content>
+      <categories>
+        <category>Cron表达式</category>
+      </categories>
+      <tags>
+        <tag>Cron表达式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MacMini 开机随航</title>
+    <url>/2025/03/21/MacMini%E9%9A%8F%E8%88%AA/</url>
+    <content><![CDATA[<h1 id="MacMini-M4-开机自动随航"><a href="#MacMini-M4-开机自动随航" class="headerlink" title="MacMini M4 开机自动随航"></a>MacMini M4 开机自动随航</h1><p>PS：图片待补充</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>Mac 已经完成了激活操作</li>
+<li>激活过程中必须要有线显示器 + 有线键鼠</li>
+<li>HDMI 欺骗器</li>
+</ol>
+<h2 id="期望"><a href="#期望" class="headerlink" title="期望"></a>期望</h2><ul>
+<li><code>MacMini</code> 开机后自动连接 <code>Ipad</code></li>
+<li><code>MacMini</code> 在随航断开后，可以通过快捷键连接 <code>Ipad</code></li>
+</ul>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="方法1：通过-vnc-连接"><a href="#方法1：通过-vnc-连接" class="headerlink" title="方法1：通过 vnc 连接"></a>方法1：通过 vnc 连接</h3><ol>
+<li><code>Mac</code> 上设置屏幕共享</li>
+<li>如果是Wifi，每次开关机的话，ip默认不会改变，或者可以指定静态ip</li>
+<li>Ipad 上下载一个 vnc 的连接软件，直接连 macIp:5900</li>
+<li>连接上能看到桌面，直接在UI上开启随航即可</li>
+<li>mac关闭，插上欺骗器重启，用上述方法测试是否能连接上</li>
+</ol>
+<h3 id="方法2：通过-AppleScript-连接"><a href="#方法2：通过-AppleScript-连接" class="headerlink" title="方法2：通过 AppleScript 连接"></a>方法2：通过 AppleScript 连接</h3><p>原理是模拟点击</p>
+<p>编写script，打包成 App，然后设置开机自动运行</p>
+<p>这里放上一个在 <code>M4</code> 上 <code>ios15</code> 版本能用的script</p>
+]]></content>
+      <categories>
+        <category>mac</category>
+      </categories>
+      <tags>
+        <tag>mac</tag>
+        <tag>随航</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Shell 笔记</title>
+    <url>/2025/03/10/Shell%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="Shell-笔记"><a href="#Shell-笔记" class="headerlink" title="Shell 笔记"></a>Shell 笔记</h1><h2 id="字符串相关"><a href="#字符串相关" class="headerlink" title="字符串相关"></a>字符串相关</h2><h4 id="字符串数组"><a href="#字符串数组" class="headerlink" title="字符串数组"></a>字符串数组</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">fruit=(apple banana watermelon)</span><br></pre></td></tr></table></figure>
+
+<h4 id="判断数组中是否包含"><a href="#判断数组中是否包含" class="headerlink" title="判断数组中是否包含"></a>判断数组中是否包含</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">fruit=(apple banana watermelon)</span><br><span class="line">myfruit=<span class="string">&quot;apple&quot;</span></span><br><span class="line"><span class="keyword">if</span> [[ <span class="string">&quot;<span class="variable">$&#123;fruit[@]&#125;</span>&quot;</span> =~ <span class="string">&quot;<span class="variable">$&#123;myfruit&#125;</span>&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;the <span class="variable">$myfruit</span> is in the fruit!&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="变量操作符"><a href="#变量操作符" class="headerlink" title="变量操作符 ${}"></a>变量操作符 ${}</h4><ul>
+<li>可以实现字符数统计, 字符串的分割提取等操作, 一下 <code>var</code> 为变量名</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 定义字符串</span></span><br><span class="line">$ var=<span class="string">&quot;/src/dir1/dir2/xun.py&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># `$&#123;#var&#125;`用于统计字符数</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;#var&#125;</span></span><br><span class="line">21</span><br><span class="line"></span><br><span class="line"><span class="comment"># `$&#123;var#*X&#125;` 用于删除`var`中从左到右数到第一个为`X`的字符, 其中`X`可为任意字符</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;var#*/&#125;</span></span><br><span class="line">src/dir1/dir2/xun.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># `$&#123;var##*X&#125;` 用于删除`var`中从左到右数到最后一个为`X`的字符</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;var##*/&#125;</span></span><br><span class="line">xun.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># `$&#123;var%X*&#125;`用于删除`var`中从右往左数到第一个为`X`的字符</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;var%/*&#125;</span></span><br><span class="line">/src/dir1/dir2</span><br><span class="line"></span><br><span class="line"><span class="comment"># `$&#123;var%%X*&#125;`用于删除`var`中从右往左数到最后一个为`X`的字符 (匹配到最左边的&quot;/&quot;，所以全部删除)</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;var%%/*&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>可以用来提取文件名称</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 定义字符串</span></span><br><span class="line">$ var=<span class="string">&quot;/src/dir1/dir2/xun.py&quot;</span></span><br><span class="line"></span><br><span class="line">$ fileNameWithSuffix=<span class="variable">$&#123;var##*/&#125;</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$fileNameWithSuffix</span></span><br><span class="line">xun.py</span><br><span class="line"></span><br><span class="line">$ fileName=<span class="variable">$&#123;fileNameWithSuffix%.*&#125;</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$fileName</span></span><br><span class="line">xun</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>shell</category>
+        <category>bash</category>
+      </categories>
+      <tags>
+        <tag>shell</tag>
+        <tag>bash</tag>
       </tags>
   </entry>
   <entry>
@@ -123,31 +248,6 @@
         <tag>SQL注入</tag>
         <tag>XSS</tag>
         <tag>CSRF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Shell 笔记</title>
-    <url>/2025/03/10/Shell%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h1 id="Shell-笔记"><a href="#Shell-笔记" class="headerlink" title="Shell 笔记"></a>Shell 笔记</h1><h2 id="字符串相关"><a href="#字符串相关" class="headerlink" title="字符串相关"></a>字符串相关</h2><h4 id="字符串数组"><a href="#字符串数组" class="headerlink" title="字符串数组"></a>字符串数组</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">fruit=(apple banana watermelon)</span><br></pre></td></tr></table></figure>
-
-<h4 id="判断数组中是否包含"><a href="#判断数组中是否包含" class="headerlink" title="判断数组中是否包含"></a>判断数组中是否包含</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">fruit=(apple banana watermelon)</span><br><span class="line">myfruit=<span class="string">&quot;apple&quot;</span></span><br><span class="line"><span class="keyword">if</span> [[ <span class="string">&quot;<span class="variable">$&#123;fruit[@]&#125;</span>&quot;</span> =~ <span class="string">&quot;<span class="variable">$&#123;myfruit&#125;</span>&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line">	<span class="built_in">echo</span> <span class="string">&quot;the <span class="variable">$myfruit</span> is in the fruit!&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="变量操作符"><a href="#变量操作符" class="headerlink" title="变量操作符 ${}"></a>变量操作符 ${}</h4><ul>
-<li>可以实现字符数统计, 字符串的分割提取等操作, 一下 <code>var</code> 为变量名</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 定义字符串</span></span><br><span class="line">$ var=<span class="string">&quot;/src/dir1/dir2/xun.py&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># `$&#123;#var&#125;`用于统计字符数</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;#var&#125;</span></span><br><span class="line">21</span><br><span class="line"></span><br><span class="line"><span class="comment"># `$&#123;var#*X&#125;` 用于删除`var`中从左到右数到第一个为`X`的字符, 其中`X`可为任意字符</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;var#*/&#125;</span></span><br><span class="line">src/dir1/dir2/xun.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># `$&#123;var##*X&#125;` 用于删除`var`中从左到右数到最后一个为`X`的字符</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;var##*/&#125;</span></span><br><span class="line">xun.py</span><br><span class="line"></span><br><span class="line"><span class="comment"># `$&#123;var%X*&#125;`用于删除`var`中从右往左数到第一个为`X`的字符</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;var%/*&#125;</span></span><br><span class="line">/src/dir1/dir2</span><br><span class="line"></span><br><span class="line"><span class="comment"># `$&#123;var%%X*&#125;`用于删除`var`中从右往左数到最后一个为`X`的字符 (匹配到最左边的&quot;/&quot;，所以全部删除)</span></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;var%%/*&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>可以用来提取文件名称</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 定义字符串</span></span><br><span class="line">$ var=<span class="string">&quot;/src/dir1/dir2/xun.py&quot;</span></span><br><span class="line"></span><br><span class="line">$ fileNameWithSuffix=<span class="variable">$&#123;var##*/&#125;</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$fileNameWithSuffix</span></span><br><span class="line">xun.py</span><br><span class="line"></span><br><span class="line">$ fileName=<span class="variable">$&#123;fileNameWithSuffix%.*&#125;</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$fileName</span></span><br><span class="line">xun</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>shell</category>
-        <category>bash</category>
-      </categories>
-      <tags>
-        <tag>shell</tag>
-        <tag>bash</tag>
       </tags>
   </entry>
   <entry>
